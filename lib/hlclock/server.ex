@@ -48,6 +48,8 @@ defmodule HLClock.Server do
 
   defp node_id([{:node_id, fun} | _]) when is_function(fun), do: fun.()
 
+  defp node_id([{:node_id, node_id} | _]), do: node_id
+
   defp interval, do: round(HLClock.max_drift() / 2)
 
   defp build_opts(opts) do
@@ -56,7 +58,7 @@ defmodule HLClock.Server do
   end
 
   defp base_opts, do: [
-    node_id: Application.get_env(:hlclock, :node_id, fn -> NodeId.hash() end),
+    node_id: NodeId.lookup(),
     name: __MODULE__
   ]
 end
