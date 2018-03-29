@@ -49,7 +49,7 @@ defmodule HLClock.NodeId do
     node_id
   end
 
-  defp validate_node_id(node_id) do
+  defp validate_node_id(_node_id) do
     invalid_node_id!()
   end
 
